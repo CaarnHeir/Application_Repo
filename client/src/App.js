@@ -4,13 +4,15 @@ import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 
 import applicationLogo from './images/applicationLogo.png';
+import useStyles from './styles';
 
 const App = () => {
+    const classes = useStyles();
     return (
         <Container maxwidth = 'lg'>
-            <AppBar position = 'static' color = 'inherit'>
-                <Typography variant="h2" align="center">Application Tracker</Typography>
-                <img src = {applicationLogo} alt="applicationLogo" height="60"/>
+            <AppBar className = {classes.appBar} position = 'static' color = 'inherit'>
+                <Typography className= {classes.heading} variant="h2" align="center">Application Tracker</Typography>
+                <img className = {classes.image} src = {applicationLogo} alt="applicationLogo" height="60"/>
             </AppBar>
             <Grow in>
                 <Container>
