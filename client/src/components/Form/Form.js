@@ -1,8 +1,10 @@
 import React, { useState }from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from 'react-file-base64';
+import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
+import { createPost } from '../../actions/posts';
 
 
 const Form = () => {
@@ -10,15 +12,19 @@ const Form = () => {
        company: '', description: '', jobTitle: '', tags: '', selectedFile: ''
     });
     const classes = useStyles();
-    const handleSubmit = () => {
+    const dispatch = useDispatch();
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        dispatch(createPost(postData));
     } 
     const clear = () => {
 
     } 
     return(
         <Paper className= {classes.paper}>
-            <form autoComplete="off" noValidate className={classes.form} onSubmit={handleSubmit}>
+            <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant= 'h6'>Adding a New Application</Typography>
                 <TextField 
                     name = "company" 
