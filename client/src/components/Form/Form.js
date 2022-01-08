@@ -1,7 +1,7 @@
-import React, { useState }from "react";
+import React, { useState, useEffect }from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 import { createPost , updatePost } from '../../actions/posts';
@@ -9,11 +9,15 @@ import { createPost , updatePost } from '../../actions/posts';
 
 
 const Form = ({ currentId, setCurrentId }) => {
+    
     const [postData, setPostData] = useState ({
        company: '', description: '', jobTitle: '', tags: '', selectedFile: ''
     });
     const classes = useStyles();
     const dispatch = useDispatch();
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+    
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,6 +28,10 @@ const Form = ({ currentId, setCurrentId }) => {
             dispatch(createPost( postData ));
         }
     } 
+        useEffect(() => {
+            if(post) setPostData(post);
+        }, [post])
+
     const clear = () => {
 
     } 

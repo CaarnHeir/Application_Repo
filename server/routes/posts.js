@@ -1,6 +1,7 @@
 //Handling all routing for posts
 
-import express, { response } from 'express';
+import express from 'express';
+// import express, { response } from 'express';
 
 import { getPosts, createPost, updatePost } from '../controllers/posts.js';
 const router = express.Router();
