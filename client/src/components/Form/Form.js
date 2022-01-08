@@ -27,6 +27,7 @@ const Form = ({ currentId, setCurrentId }) => {
         } else{
             dispatch(createPost( postData ));
         }
+        clear();
     } 
         useEffect(() => {
             if(post) setPostData(post);
