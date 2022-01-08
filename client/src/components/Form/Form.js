@@ -33,12 +33,13 @@ const Form = ({ currentId, setCurrentId }) => {
         }, [post])
 
     const clear = () => {
-
+        setCurrentId(null);
+        setPostData({company: '', description: '', jobTitle: '', tags: '', selectedFile: ''});
     } 
     return(
         <Paper className= {classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant= 'h6'>Adding a New Application</Typography>
+                <Typography variant= 'h6'>{ currentId ? 'Editing' : 'Adding'} an Application</Typography>
                 <TextField 
                     name = "company" 
                     variant = "outlined" 
