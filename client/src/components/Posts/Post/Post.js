@@ -34,7 +34,7 @@ const Post = ({ post , setCurrentId }) => {
             <CardActions className = {classes.cardActions}>
                 <Button size = 'small' color = 'primary' onClick = {() => dispatch(interactionPost(post._id))}>
                     <ThumbUpAltIcon fontSize = 'small' />
-                        interactions {""}
+                        &nbsp; interactions &nbsp;
                         {post.interactions}
                 </Button>
                 <Button size = 'small' color = 'primary' onClick = {() => dispatch(deletePost(post._id))}>
