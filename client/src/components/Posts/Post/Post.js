@@ -24,7 +24,7 @@ const Post = ({ post }) => {
             </div>
             <CardContent>
                 <Typography className = {classes.title} variant = "h5" noWrap='True' gutterBottom>
-                        <a href= {''+post._id} >{post.description}</a>
+                        {post.description}
                 </Typography> 
             </CardContent>
             <CardActions className = {classes.cardActions}>
