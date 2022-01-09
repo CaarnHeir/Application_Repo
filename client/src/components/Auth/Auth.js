@@ -7,6 +7,7 @@ import useStyles from './styles';
 import Input from './Input';
 import Icon from './icon';
 
+
 const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
@@ -57,7 +58,7 @@ const Auth = () => {
                         { signedUp ? 'Sign Up' : 'Sign In' }
                     </Button>
                     <GoogleLogin 
-                        clientId = {process.env.CLIENT_ID}
+                        clientId = {process.env.CLIENT_ID} 
                         render = { (renderProps) => (
                             <Button 
                                 className= { classes.googleButton } 
