@@ -3,9 +3,11 @@ import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import { GoogleLogin } from 'react-google-login';
 
+
 import useStyles from './styles';
 import Input from './Input';
 import Icon from './icon';
+
 
 
 const Auth = () => {
@@ -58,7 +60,7 @@ const Auth = () => {
                         { signedUp ? 'Sign Up' : 'Sign In' }
                     </Button>
                     <GoogleLogin 
-                        clientId = {process.env.CLIENT_ID} 
+                        clientId = {process.env.REACT_APP_CLIENT_ID} 
                         render = { (renderProps) => (
                             <Button 
                                 className= { classes.googleButton } 
