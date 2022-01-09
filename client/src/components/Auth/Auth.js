@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
+import { GoogleLogin } from 'react-google-login';
 
 import useStyles from './styles';
 import Input from './Input';
+import Icon from './icon';
 
 const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
-    const signedUp = true;
+    const [signedUp, setSignedUp] = useState(false);
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
-
+    const switchMode = () => {
+        setSignedUp((prevSignedUp) => !prevSignedUp);
+        handleShowPassword(false);
+    }
+    
     const handleSubmit = () => {
 
     }
@@ -40,9 +46,31 @@ const Auth = () => {
                         <Input name = 'password' label = 'Password' handleChange = { handleChange } type = { showPassword ? 'text' : 'password' } handleShowPassword = { handleShowPassword} /> 
                         { signedUp && <Input name = 'confirmPassword' label = 'Confirm Password' handleChange = { handleChange } type = 'password'/>}
                     </Grid>
+                    <GoogleLogin 
+                        clientId = "GOOGLE ID"
+                        render = { (renderProps) => (
+                            <Button 
+                                className= { classes.googleButton } 
+                                color = 'primary' 
+                                fullWidth 
+                                onClick = { renderProps.onClick } 
+                                disabled = { renderProps.disabled } 
+                                startIcon = { <Icon/> } 
+                                variant = 'contained'>
+                                    Google Sign In
+                            </Button>
+                        )}
+                    />
                     <Button type = 'submit' fullWidth variant = 'contained' color = 'primary' className= { classes.submit }>
                         { signedUp ? 'Sign Up' : 'Sign In' }
                     </Button>
+                    <Grid container justify = 'flex-end'>
+                        <Grid item>
+                            <Button onClick={ switchMode }>
+                                { signedUp ? 'Already have an account? Sign In' : 'No account? Sign Up!'}
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </form>
             </Paper>
         </Container>
