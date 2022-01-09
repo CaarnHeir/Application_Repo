@@ -26,6 +26,13 @@ const Auth = () => {
 
     }
 
+    const googleSuccess = (res) => {
+        console.log(res);
+    }
+    const googleFailure = () => {
+        console.log("Google Sign In was unsuccessful. Please, try again.");
+    }
+
     return (
         <Container component= 'main' maxWidth = 'xs'>
             <Paper className = { classes.paper } elevation = { 3 }>
@@ -47,7 +54,7 @@ const Auth = () => {
                         { signedUp && <Input name = 'confirmPassword' label = 'Confirm Password' handleChange = { handleChange } type = 'password'/>}
                     </Grid>
                     <GoogleLogin 
-                        clientId = "GOOGLE ID"
+                        clientId = 'GOOGLE ID'
                         render = { (renderProps) => (
                             <Button 
                                 className= { classes.googleButton } 
@@ -60,6 +67,9 @@ const Auth = () => {
                                     Google Sign In
                             </Button>
                         )}
+                        onSuccess = { googleSuccess }
+                        onFailure = { googleFailure }
+                        cookiePolicy ='single_host_origin'
                     />
                     <Button type = 'submit' fullWidth variant = 'contained' color = 'primary' className= { classes.submit }>
                         { signedUp ? 'Sign Up' : 'Sign In' }
