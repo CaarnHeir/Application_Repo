@@ -20,7 +20,7 @@ const Post = ({ post , setCurrentId }) => {
                 <Typography variant = "h6">{post.company} - {post.jobTitle}</Typography>
                 <Typography variant = "body2">{moment(post.createdAt).fromNow()}</Typography>
                 <Button style = {{color: 'white'}} size ='small' onClick = {() => setCurrentId( post._id )}>
-                    <MoreHorizIcon fontSize = 'default'></MoreHorizIcon>
+                    <MoreHorizIcon fontSize = 'medium'></MoreHorizIcon>
                 </Button>
             </div>
             <div className = {classes.details}>

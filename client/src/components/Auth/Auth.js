@@ -2,35 +2,56 @@ import React, { useState } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import { GoogleLogin } from 'react-google-login';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 import useStyles from './styles';
 import Input from './Input';
 import Icon from './icon';
+import { signin, signup } from '../../actions/auth';
 
-
+const initialState = { firstname: '', lastname: '', email: '', password: '', confirmPassword: ''}
 
 const Auth = () => {
     const classes = useStyles();
-    const [showPassword, setShowPassword] = useState(false);
     const [signedUp, setSignedUp] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const [formData, setFormData] = useState(initialState);
+    const [showPassword, setShowPassword] = useState(false);
 
-    const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
+    const handleShowPassword = () => setShowPassword(!showPassword);
+
     const switchMode = () => {
         setSignedUp((prevSignedUp) => !prevSignedUp);
-        handleShowPassword(false);
-    }
+        setShowPassword(false);
+    };
     
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        if(signedUp) {
+            dispatch(signup(formData, history));
+        } else {
+            dispatch(signin(formData, history));
+        }
+    };
 
-    }
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value });
+    };
 
-    const handleChange = () => {
-
-    }
-
-    const googleSuccess = (res) => {
-        console.log(res);
+    const googleSuccess = async (res) => {
+        const result = res?.profileObj;
+        const token = res?.tokenId;
+    
+        try {
+            dispatch({ type: 'AUTH', data: { result, token }});
+            history.push('/');
+        } catch (error) {
+            
+        }
     }
     const googleFailure = () => {
         console.log("Google Sign In was unsuccessful. Please, try again.");
@@ -43,6 +64,7 @@ const Auth = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography variant ='h5'>{ signedUp ? 'Sign Up' :'Sign In' }</Typography>
+                <br></br>
                 <form className = { classes.signedUp } onSubmit = { handleSubmit }>
                     <Grid container spacing = { 2 }>
                         {

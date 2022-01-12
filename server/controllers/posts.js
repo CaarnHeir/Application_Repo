@@ -51,10 +51,22 @@ export const deletePost = async (req, res) => {
 export const interactionPost = async (req, res) => {
     const { id } = req.params;
 
+    if(!req.userId) return res.json({ message: "Not Authenticated."})
+
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
 
     const post = await PostMessage.findById(id);
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, { interactions: post.interactions + 1}, {new: true});
+
+    const index = post.interations.findIndex((id) => id === String(req.userId));
+
+    if(index === -1) {
+        post.interactions.push(req.userId);
+    } else {
+        post.interactions = post.interactions.filter((id) => id !== String(req.userId));
+    }
+    
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post , {new: true});
 
     res.json(updatedPost);
 }
