@@ -11,12 +11,11 @@ import { createPost , updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({ company: '', jobTitle: '', description: '', tags: [], selectedFile: '' });
-    const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
+    const post = useSelector((state) => (currentId ? state.posts.posts.find((description) => description._id === currentId) : null));
     const dispatch = useDispatch();
     const classes = useStyles();
     const user = JSON.parse(localStorage.getItem('profile'));
     const history = useHistory();
-    
 
     const clear = () => {
         setCurrentId(0);
