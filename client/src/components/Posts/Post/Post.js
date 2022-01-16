@@ -19,7 +19,7 @@ const Post = ({ post , setCurrentId }) => {
         if(post.interactions.length > 0) {
             return post.interactions.find((interaction) => interaction === (user?.result?.googleId || user?.result?._id))
             ? (
-                <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.interactions.length > 2 ? `You and ${post.interactions.length - 1} others` : `${post.interactions.length} like${post.interactions.length > 1 ? 's' : ''}` }</>
+                <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.interactions.length > 2 ? `You and ${post.interactions.length - 1} others` : `${post.interactions.length} interaction${post.interactions.length > 1 ? 's' : ''}` }</>
                 ) : (
                   <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.interactions.length} {post.interactions.length === 1 ? 'Interaction' : 'Interactions'}</>
                 );
@@ -34,14 +34,16 @@ const Post = ({ post , setCurrentId }) => {
             <div className = {classes.overlay}>
                 <Typography variant = "h6">{post.company} - {post.jobTitle}</Typography>
                 <Typography variant = "body2">{moment(post.createdAt).fromNow()}</Typography>
-                <Button onClick={(e) => {
-                    e.stopPropagation(); 
-                    setCurrentId(post._id);
-                }}
-                    style={{ color: 'white' }}
-                    size="small">
-            <MoreHorizIcon fontSize="default" />
-          </Button>
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                    <Button onClick={(e) => {
+                            e.stopPropagation(); 
+                            setCurrentId(post._id);
+                        }}
+                        style={{ color: 'white' }}
+                        size="small">
+                        <MoreHorizIcon fontSize="default" />
+                    </Button>
+                )}
             </div>
             <div className = {classes.details}>
                 <Typography variant = "body2" color = 'textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
@@ -55,10 +57,11 @@ const Post = ({ post , setCurrentId }) => {
                 <Button size = 'small' color = 'primary' disabled = {!user?.result} onClick = {() => dispatch(interactionPost(post._id))}>
                     <Interactions />
                 </Button>
-                <Button size = 'small' color = 'primary' onClick = {() => dispatch(deletePost(post._id))}>
-                    <DeleteIcon fontSize = 'small' />
-                        Delete
-                </Button>
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                    <Button size = 'small' color = 'primary' onClick = {() => dispatch(deletePost(post._id))}>
+                        <DeleteIcon fontSize = 'small' />Delete
+                    </Button>
+                )}
             </CardActions>
         </Card>
     )
