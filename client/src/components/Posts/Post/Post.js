@@ -1,11 +1,12 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase} from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
+import { useHistory } from 'react-router-dom';
 
 import useStyles from './styles';
 import { deletePost, interactionPost } from '../../../actions/posts';
@@ -14,6 +15,7 @@ const Post = ({ post , setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
+    const history = useHistory();
 
     const Interactions = () => {
         if(post.interactions.length > 0) {
@@ -28,19 +30,26 @@ const Post = ({ post , setCurrentId }) => {
             return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Interaction</>;
         };
 
+        const openPost = (e) => {
+            // dispatch(getPost(post._id, history));
+        
+            history.push(`/posts/${post._id}`);
+          };
+
     return(
         <Card className= {classes.card}>
-            <CardMedia className = {classes.media} image = {post.selectedFile} title = {post.company}/>
+            <ButtonBase component="span" name="test" className={classes.cardAction} onClick={openPost}>
+            <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.company} />
             <div className = {classes.overlay}>
                 <Typography variant = "h6">{post.company} - {post.jobTitle}</Typography>
                 <Typography variant = "body2">{moment(post.createdAt).fromNow()}</Typography>
                 {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
                     <Button onClick={(e) => {
-                            e.stopPropagation(); 
-                            setCurrentId(post._id);
-                        }}
-                        style={{ color: 'white' }}
-                        size="small">
+                        e.stopPropagation(); 
+                        setCurrentId(post._id);
+                    }}
+                    style={{ color: 'white' }}
+                    size="small">
                         <MoreHorizIcon fontSize="default" />
                     </Button>
                 )}
@@ -53,6 +62,7 @@ const Post = ({ post , setCurrentId }) => {
                         {post.description}
                 </Typography> 
             </CardContent>
+                </ButtonBase>
             <CardActions className = {classes.cardActions}>
                 <Button size = 'small' color = 'primary' disabled = {!user?.result} onClick = {() => dispatch(interactionPost(post._id))}>
                     <Interactions />
@@ -64,7 +74,7 @@ const Post = ({ post , setCurrentId }) => {
                 )}
             </CardActions>
         </Card>
-    )
-}
+    );
+};
 
 export default Post;
