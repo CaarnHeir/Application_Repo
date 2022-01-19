@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase} from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -7,6 +7,7 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
 import { deletePost, interactionPost } from '../../../actions/posts';
@@ -36,7 +37,7 @@ const Post = ({ post , setCurrentId }) => {
 
     return(
         <Card className= {classes.card} raised elevation={6}>
-            {/* <ButtonBase component="span" name="test" className={classes.cardAction} onClick={openPost}> */}
+            <Link component="span" name="test" className={classes.cardAction} onClick={openPost}>
             <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.company} />
             <div className = {classes.overlay}>
                 <Typography variant = "h6">{post.company} - {post.jobTitle}</Typography>
@@ -60,7 +61,7 @@ const Post = ({ post , setCurrentId }) => {
                         {post.description}
                 </Typography> 
             </CardContent>
-                {/* </ButtonBase> */}
+                </Link>
             <CardActions className = {classes.cardActions}>
                 <Button size = 'small' color = 'primary' disabled = {!user?.result} onClick = {() => dispatch(interactionPost(post._id))}>
                     <Interactions />
