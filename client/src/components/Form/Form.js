@@ -51,7 +51,7 @@ const Form = ({ currentId, setCurrentId }) => {
      
 
     return(
-        <Paper className= {classes.paper}>
+        <Paper className= {classes.paper} elevation={6}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant= 'h6'>{ currentId ? 'Editing' : 'Adding'} an Application</Typography>
                 <TextField name = "company" variant = "outlined" label = "Company" fullWidth value = {postData.company} onChange = {(e) => setPostData({ ...postData, company: e.target.value })}/>

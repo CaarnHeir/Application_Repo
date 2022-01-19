@@ -17,7 +17,7 @@ const Post = () => {
 
   useEffect(() => {
     dispatch(getPost(id));
-  }, );
+  }, [id]);
 
   useEffect(() => {
     if (post) {
@@ -80,3 +80,17 @@ const Post = () => {
 };
 
 export default Post;
+
+
+// import React from 'react';
+
+// const PostDetails = () => {
+//   console.log("Post details");
+//   return (
+//     <div>
+//         POST DETAILS
+//     </div>
+//   )
+// }
+
+// export default PostDetails;

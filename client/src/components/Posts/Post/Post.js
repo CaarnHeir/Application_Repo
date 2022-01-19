@@ -31,13 +31,11 @@ const Post = ({ post , setCurrentId }) => {
         };
 
         const openPost = (e) => {
-            // dispatch(getPost(post._id, history));
-        
             history.push(`/posts/${post._id}`);
           };
 
     return(
-        <Card className= {classes.card}>
+        <Card className= {classes.card} raised elevation={6}>
             <ButtonBase component="span" name="test" className={classes.cardAction} onClick={openPost}>
             <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.company} />
             <div className = {classes.overlay}>

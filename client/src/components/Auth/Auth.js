@@ -24,9 +24,10 @@ const Auth = () => {
     const handleShowPassword = () => setShowPassword(!showPassword);
 
     const switchMode = () => {
-        setSignedUp((prevSignedUp) => !prevSignedUp);
+        setFormData(initialState);
+        setSignedUp((prevIsSignup) => !prevIsSignup);
         setShowPassword(false);
-    };
+      };
     
     const handleSubmit = (e) => {
         e.preventDefault();

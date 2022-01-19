@@ -6,6 +6,7 @@ import decode from 'jwt-decode';
 
 import useStyles from './styles';
 import applicationLogo from '../../images/applicationLogo.png';
+import applicationText from '../../images/applicationText.png';
 import * as actionType from '../../constants/actionTypes';
 
 export const Navbar = () => {
@@ -19,7 +20,7 @@ export const Navbar = () => {
         dispatch({ type: actionType.LOGOUT });
         history.push('/auth');
         setUser(null);
-    }
+    };
     useEffect(() => {
         const token = user?.token;
         if (token) {
@@ -32,10 +33,10 @@ export const Navbar = () => {
   
     return (
         <AppBar className = { classes.appBar } position = 'static' color = 'inherit'>
-            {/* <Link to='/' className= { classes.brandContainer }> */}
-                <Typography component = { Link } to = "/" className= { classes.heading } variant="h2" align="center">Application Tracker</Typography>
-                <img className = { classes.image } src = { applicationLogo } alt="applicationLogo" height="60"/>
-            {/* </Link> */}
+            <Link to='/' className= { classes.brandContainer }>
+                <img src = {applicationText} alt= 'icon'/>
+                <img className = { classes.image } src = { applicationLogo } alt="applicationLogo" height="60px"/>
+            </Link>
             <Toolbar className = { classes.toolbar }>
                 {user ?(
                     <div className = { classes.profile }>
