@@ -36,7 +36,7 @@ const Post = ({ post , setCurrentId }) => {
 
     return(
         <Card className= {classes.card} raised elevation={6}>
-            <ButtonBase component="span" name="test" className={classes.cardAction} onClick={openPost}>
+            {/* <ButtonBase component="span" name="test" className={classes.cardAction} onClick={openPost}> */}
             <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.company} />
             <div className = {classes.overlay}>
                 <Typography variant = "h6">{post.company} - {post.jobTitle}</Typography>
@@ -60,7 +60,7 @@ const Post = ({ post , setCurrentId }) => {
                         {post.description}
                 </Typography> 
             </CardContent>
-                </ButtonBase>
+                {/* </ButtonBase> */}
             <CardActions className = {classes.cardActions}>
                 <Button size = 'small' color = 'primary' disabled = {!user?.result} onClick = {() => dispatch(interactionPost(post._id))}>
                     <Interactions />
