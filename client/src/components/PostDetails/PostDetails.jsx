@@ -46,7 +46,7 @@ const Post = () => {
           <Typography variant="h3" component="h2">{post.company}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
           <Typography gutterBottom variant="body1" component="p">{post.description}</Typography>
-          <Typography variant="h6">Created by: {post.jobTitle}</Typography>
+          <Typography variant="h6">Job Title: {post.jobTitle}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
           <Divider style={{ margin: '20px 0' }} />
           <CommentSection post={post} />

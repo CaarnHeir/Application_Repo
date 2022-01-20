@@ -49,5 +49,9 @@ export default makeStyles((theme) => ({
     height: '200px',
     overflowY: 'auto',
     marginRight: '30px',
+    maxWidth: '600px',
+  },
+  singleComment: {
+    wordWrap: "break-word",
   },
 }));
