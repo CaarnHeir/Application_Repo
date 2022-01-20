@@ -68,7 +68,8 @@ const Home = () => {
                                     variant="outlined"
                                 />
                                 <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
-                                <br/>
+                                <br/> 
+                                {/* //TODO: Need to remove br and fix styling to creat the same spacing as the submit clear. */}
                                 <Button onClick = {clearSearch} variant = 'contained' color = 'secondary' size = 'small' fullWidth>Clear</Button>
                                 
                             </AppBar>
