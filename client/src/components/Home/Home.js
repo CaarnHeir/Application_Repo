@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input';
 
 import { getPostsBySearch } from '../../actions/posts';
@@ -43,6 +43,12 @@ const Home = () => {
     const handleAdd = (tag) => setTags([...tags, tag]);
     const handleDelete = (tagToDelete) => setTags(tags.filter((tag) => tag !== tagToDelete));
 
+    const clearSearch = () => {
+        setCurrentId(0);
+        setSearch('');
+        history.push('/posts');
+      };
+
     return (
         <Grow in>
                 <Container maxWidth='xl'>
@@ -62,6 +68,9 @@ const Home = () => {
                                     variant="outlined"
                                 />
                                 <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
+                                <br/>
+                                <Button onClick = {clearSearch} variant = 'contained' color = 'secondary' size = 'small' fullWidth>Clear</Button>
+                                
                             </AppBar>
                             <Form currentId = {currentId}setCurrentId = { setCurrentId } />
                             {(!searchQuery && !tags.length) && (
