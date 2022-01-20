@@ -58,16 +58,16 @@ export const interactionPost = (id) => async (dispatch) => {
 };
 
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
-    try {
-      dispatch({ type: START_LOADING });
-      const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
-  
-      dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
-      dispatch({ type: END_LOADING });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  try {
+    dispatch({ type: START_LOADING });
+    const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+    console.log(data);
+    dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   export const getPost = (id) => async (dispatch) => {
     try {
