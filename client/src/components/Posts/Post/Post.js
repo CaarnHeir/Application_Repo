@@ -1,16 +1,16 @@
 import React from "react";
 import { Card, CardActions, CardContent, CardMedia, Button, Typography} from '@material-ui/core';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+// import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
+// import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import useStyles from './styles';
-import { deletePost, interactionPost } from '../../../actions/posts';
+import { deletePost } from '../../../actions/posts';
 
 const Post = ({ post , setCurrentId }) => {
     const classes = useStyles();
@@ -18,18 +18,18 @@ const Post = ({ post , setCurrentId }) => {
     const user = JSON.parse(localStorage.getItem('profile'));
     const history = useHistory();
 
-    const Interactions = () => {
-        if(post.interactions.length > 0) {
-            return post.interactions.find((interaction) => interaction === (user?.result?.googleId || user?.result?._id))
-            ? (
-                <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.interactions.length > 2 ? `You and ${post.interactions.length - 1} others` : `${post.interactions.length} interaction${post.interactions.length > 1 ? 's' : ''}` }</>
-                ) : (
-                  <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.interactions.length} {post.interactions.length === 1 ? 'Interaction' : 'Interactions'}</>
-                );
-            }
+    // const Interactions = () => {
+    //     if(post.interactions.length > 0) {
+    //         return post.interactions.find((interaction) => interaction === (user?.result?.googleId || user?.result?._id))
+    //         ? (
+    //             <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.interactions.length > 2 ? `You and ${post.interactions.length - 1} others` : `${post.interactions.length} interaction${post.interactions.length > 1 ? 's' : ''}` }</>
+    //             ) : (
+    //               <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.interactions.length} {post.interactions.length === 1 ? 'Interaction' : 'Interactions'}</>
+    //             );
+    //         }
         
-            return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Interaction</>;
-        };
+    //         return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Interaction</>;
+    //     };
 
         const openPost = (e) => {
             history.push(`/posts/${post._id}`);
