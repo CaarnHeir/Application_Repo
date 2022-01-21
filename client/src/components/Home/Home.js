@@ -72,9 +72,9 @@ const Home = () => {
     return (
         <Grow in>
                 <Container maxWidth='xl'>
-                    <Grid className = {classes.gridContainer} container justifyContent = "space-between" alignItems="stretch" spacing= {3}> 
                     {user ?(
                       <>
+                      <Grid className = {classes.gridContainer} container justifyContent = "space-between" alignItems="stretch" spacing= {3}> 
                         <Grid item xs = {12} sm = {6} md={9}>
                             <Posts setCurrentId = { setCurrentId } />
                         </Grid>
@@ -101,13 +101,15 @@ const Home = () => {
                                 </Paper>
                             )}
                         </Grid>
-                        </>
+                      </Grid>
+                      </>
                     ):(
                       <>
-                        <Form currentId = {currentId}setCurrentId = { setCurrentId } />
+                        <Grid className = {classes.gridContainer} container justifyContent = "flex-end" alignItems="stretch" spacing= {3}> 
+                          <Form currentId = {currentId}setCurrentId = { setCurrentId } />
+                          </Grid>
                       </>
                     )}
-                    </Grid>
                 </Container>
             </Grow>
     )
