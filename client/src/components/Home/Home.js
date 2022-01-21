@@ -107,7 +107,7 @@ const Home = () => {
                       <>
                         <Grid className = {classes.gridContainer} container justifyContent = "flex-end" alignItems="stretch" spacing= {3}> 
                           <Form currentId = {currentId}setCurrentId = { setCurrentId } />
-                          </Grid>
+                        </Grid>
                       </>
                     )}
                 </Container>
