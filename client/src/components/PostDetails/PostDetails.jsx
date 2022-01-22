@@ -14,6 +14,7 @@ const Post = () => {
   const history = useHistory();
   const classes = useStyles();
   const { id } = useParams();
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
     dispatch(getPost(id));
@@ -40,6 +41,8 @@ const Post = () => {
   const recommendedPosts = posts.filter(({ _id }) => _id !== post._id);
 
   return (
+    <>
+    {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
       <div className={classes.card}>
         <div className={classes.section}>
@@ -74,6 +77,10 @@ const Post = () => {
         </div>
       )}
     </Paper>
+    )}
+    {(user?.result?.googleId !== post?.creator || user?.result?._id !== post?.creator) && (
+      <h1>ERROR:That is another user's post.</h1>)}
+    </>
   );
 };
 

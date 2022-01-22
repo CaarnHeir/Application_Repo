@@ -33,27 +33,27 @@ const Post = ({ post , setCurrentId }) => {
 
         const openPost = (e) => {
             history.push(`/posts/${post._id}`);
-          };
-
-    return(
-        <Card className= {classes.card} raised elevation={6}>
-            <Link component="span" name="test" className={classes.cardAction} onClick={openPost}>
-            <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.company} />
-            <div className = {classes.overlay}>
+        };
+        
+        return(
+            <>
+            {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                <Card className= {classes.card} raised elevation={6}>
+                <Link component="span" name="test" className={classes.cardAction} onClick={openPost}>
+                <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.company} />
+                <div className = {classes.overlay}>
                 <Typography variant = "h6">{post.company} - {post.jobTitle}</Typography>
                 <Typography variant = "body2">{moment(post.createdAt).fromNow()}</Typography>
-                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-                    <Button onClick={(e) => {
-                        e.stopPropagation(); 
-                        setCurrentId(post._id);
-                    }}
-                    style={{ color: 'white' }}
-                    size="small">
-                        <MoreHorizIcon fontSize="default" />
-                    </Button>
-                )}
-            </div>
-            <div className = {classes.details}>
+                <Button onClick={(e) => {
+                    e.stopPropagation(); 
+                    setCurrentId(post._id);
+                }}
+                style={{ color: 'white' }}
+                size="small">
+                <MoreHorizIcon fontSize="default" />
+                </Button>
+                </div>
+                <div className = {classes.details}>
                 <Typography variant = "body2" color = 'textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
             </div>
             <CardContent>
@@ -62,7 +62,7 @@ const Post = ({ post , setCurrentId }) => {
                 </Typography> 
             </CardContent>
                 </Link>
-            <CardActions className = {classes.cardActions}>
+                <CardActions className = {classes.cardActions}>
                 {/* <Button size = 'small' color = 'primary' disabled = {!user?.result} onClick = {() => dispatch(interactionPost(post._id))}>
                     <Interactions />
                 </Button> */}
@@ -73,7 +73,9 @@ const Post = ({ post , setCurrentId }) => {
                 )}
             </CardActions>
         </Card>
-    );
-};
+        )}
+        </>
+        );
+    };
 
 export default Post;
