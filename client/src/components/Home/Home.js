@@ -43,10 +43,6 @@ const Home = () => {
           history.push('/');
         }
       };
-
-    const getPostsByCreator = () => {
-        console.log(user?.result._id)
-    };
       
     const handleKeyPress = (e) => {
       if (e.keyCode === 13) {
@@ -73,11 +69,22 @@ const Home = () => {
         history.push('/posts');
       };
 
+    useEffect(() => {
+      const token = user?.token;
+      if (token) {
+        const decodedToken = decode(token);
+        if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+      }
+  
+      setUser(JSON.parse(localStorage.getItem('profile')));
+    }, [location]);  
+
     return (
         <Grow in>
                 <Container maxWidth='xl'>
-                    <Grid className = {classes.gridContainer} container justifyContent = "space-between" alignItems="stretch" spacing= {3}>
-                        {user?(
+                    {user ?(
+                      <>
+                      <Grid className = {classes.gridContainer} container justifyContent = "space-between" alignItems="stretch" spacing= {3}> 
                         <Grid item xs = {12} sm = {6} md={9}>
                             <Posts setCurrentId = { setCurrentId } />
                         </Grid>
@@ -96,20 +103,28 @@ const Home = () => {
                                 <Button onClick={searchPost} className={classes.searchButton} variant="contained" color="primary">Search</Button>
                                 <br/> 
                                 {/* //TODO: Need to remove br and fix styling to creat the same spacing as the submit clear. */}
-                                <Button onClick = {clearSearch} variant = 'contained' color = 'secondary' size = 'small' fullWidth>Clear</Button>
-                                <Button onClick = {getPostsByCreator}variant = 'contained' color = 'secondary' size = 'small' fullWidth>TEST</Button>
+
+                                <Button onClick = {clearSearch} variant = 'contained' color = 'secondary' size = 'small' fullWidth>Clear</Button> 
                             </AppBar>
                             <Form currentId = {currentId}setCurrentId = { setCurrentId } />
                             {(!searchQuery && !tags.length) && (
-                                <Paper elevation={6} className = {classes.pagination}>
+                              <Paper elevation={6} className = {classes.pagination}>
                                     <Pagination page= {page}/>
                                 </Paper>
                             )}
                         </Grid>
-                    </Grid>
+                      </Grid>
+                      </>
+                    ):(
+                      <>
+                        <Grid className = {classes.gridContainer} container justifyContent = "flex-end" alignItems="stretch" spacing= {3}> 
+                          <Form currentId = {currentId}setCurrentId = { setCurrentId } />
+                        </Grid>
+                      </>
+                    )}
                 </Container>
             </Grow>
     )
-}
+};
 
 export default Home
