@@ -9,15 +9,26 @@ import CommentSection from './CommentSection';
 import useStyles from './styles';
 
 const Post = () => {
-  const { post, posts, isLoading } = useSelector((state) => state.posts);
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const { post } = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => {
+    if(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator){
+      return state.posts
+    } else {
+      console.log("ERROR");
+    }  
+  });
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const { id } = useParams();
-  const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
-    dispatch(getPost(id));
+    if(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator){
+      dispatch(getPost(id));
+    } else {
+      console.log('THIS IS NOT YOUR POST>>>SHAME SHAME SHAME');
+    }
   }, [id]);
 
   useEffect(() => {
@@ -28,7 +39,13 @@ const Post = () => {
 
   if (!post) return null;
 
-  const openPost = (_id) => history.push(`/posts/${_id}`);
+  const openPost = (_id) => {
+   if(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator){
+    history.push(`/posts/${_id}`);
+   } else {
+    console.log('THIS IS NOT YOUR POST>>>SHAME SHAME SHAME');
+   }
+   };
 
   if (isLoading) {
     return (
@@ -78,8 +95,6 @@ const Post = () => {
       )}
     </Paper>
     )}
-    {(user?.result?.googleId !== post?.creator || user?.result?._id !== post?.creator) && (
-      <h1>ERROR:That is another user's post.</h1>)}
     </>
   );
 };
