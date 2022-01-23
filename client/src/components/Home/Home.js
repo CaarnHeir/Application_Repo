@@ -11,6 +11,7 @@ import Form from "../Form/Form";
 import Pagination from "../Pagination";
 import useStyles from './styles';
 import * as actionType from '../../constants/actionTypes';
+import Animation from '../Animation/Animation';
 
 function useQuery() {
      return new URLSearchParams(useLocation().search);
@@ -116,7 +117,8 @@ const Home = () => {
                       </>
                       ):(
                       <>
-                        <Grid className = {classes.gridContainer} container justifyContent = "flex-end" alignItems="stretch" spacing= {3}> 
+                        <Grid className = {classes.gridContainer} container justifyContent = "flex-end" alignItems="stretch" spacing= {3}>
+                          {/* <Animation/>  */}
                           <Form currentId = {currentId}setCurrentId = { setCurrentId } />
                         </Grid>
                       </>
