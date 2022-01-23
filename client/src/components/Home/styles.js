@@ -19,5 +19,15 @@ export default makeStyles((theme) => ({
     },
     homeForm: {
         justifyContent: 'flex-end'
-    }
+    },
+    textContainer: {
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column-reverse',
+        },
+    },
+    gridMovie: {
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        },
+    },
 }));

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
+import { Container, Grow, Grid, Paper, AppBar, TextField, Button, Typography } from '@material-ui/core';
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input';
 import decode from 'jwt-decode';
@@ -11,6 +11,7 @@ import Form from "../Form/Form";
 import Pagination from "../Pagination";
 import useStyles from './styles';
 import * as actionType from '../../constants/actionTypes';
+import Application_Tracker_Video_Loop from '../../images/Application_Tracker_Video_Loop.mp4';
 
 
 function useQuery() {
@@ -117,9 +118,19 @@ const Home = () => {
                       </>
                       ):(
                       <>
-                        <Grid className = {classes.gridContainer} container justifyContent = "flex-end" alignItems="stretch" spacing= {3}>
-                          {/* <Animation/>  */}
-                          <Form currentId = {currentId}setCurrentId = { setCurrentId } />
+                        <Grid className = {classes.gridMovie} container justifyContent = "center" alignItems="stretch" spacing= {3}>
+                          {/* <Form currentId = {currentId}setCurrentId = { setCurrentId } /> */}
+                          <video className ='videoTag' autoPlay loop muted>
+                            <source src={Application_Tracker_Video_Loop} type='video/mp4'/>
+                          </video>
+                        </Grid>
+                        <br></br>
+                        <br></br>
+                        <Grid className = {classes.textContainer} container justifyContent = "center" alignItems="center" spacing= {0}>
+                          <Typography variant="h6">Your one-stop-shop for tracking positions that you have applied to.</Typography>    
+                        </Grid>
+                        <Grid className = {classes.textContainer} container justifyContent = "center" alignItems="center" spacing= {0}>
+                          <Typography variant='subtitle1'>Gone are the days of trying to find a post you applied for that has subsequently been taken off the company site!</Typography>
                         </Grid>
                       </>
                       )}
