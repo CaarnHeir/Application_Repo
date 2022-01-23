@@ -11,7 +11,7 @@ import Form from "../Form/Form";
 import Pagination from "../Pagination";
 import useStyles from './styles';
 import * as actionType from '../../constants/actionTypes';
-import Animation from '../Animation/Animation';
+
 
 function useQuery() {
      return new URLSearchParams(useLocation().search);
