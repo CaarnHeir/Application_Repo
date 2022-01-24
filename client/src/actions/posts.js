@@ -68,6 +68,18 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
   }
 };
 
+export const getPostsBySearchUser = (searchQuery) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data: { data } } = await api.fetchPostsBySearchUser(searchQuery);
+    console.log(data);
+    dispatch({ type: FETCH_BY_SEARCH, payload: { data } });
+    dispatch({ type: END_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
   export const getPost = (id) => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING });
