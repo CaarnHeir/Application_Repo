@@ -12,6 +12,7 @@ const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store = {store}>
+        <title>Application Tracker</title>
         <App />
     </Provider>,
     document.getElementById('root')
